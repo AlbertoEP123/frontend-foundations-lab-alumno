@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es" data-exercise-id="22-capstone-product-explorer" data-exercise-title="22 · Capstone Product Explorer">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explorador de productos construido con la plataforma web sin framework.">
+    <title>Starter · Product Explorer</title>
+    <link rel="stylesheet" href="/shared/base.css">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#catalog">Saltar al catalogo</a>
+
+    <header class="app-header">
+      <div class="container app-header__inner">
+        <a class="brand" href="/">Frontend Foundations</a>
+        <button class="button" type="button" data-new-product>Nuevo producto</button>
+      </div>
+    </header>
+
+    <main id="catalog" class="container page-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Capstone sin framework</p>
+        <h1 id="page-title">Product Explorer</h1>
+        <p>Busca, filtra y administra el catalogo utilizando HTML, CSS, JavaScript y APIs nativas del navegador.</p>
+      </section>
+
+      <form class="filters card" data-filters aria-label="Filtros del catalogo">
+        <div class="field filters__search">
+          <label for="search">Buscar</label>
+          <input id="search" name="search" type="search" autocomplete="off" placeholder="Nombre, categoria o descripcion">
+        </div>
+        <div class="field">
+          <label for="category-filter">Categoria</label>
+          <select id="category-filter" name="category">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sort">Ordenar por</label>
+          <select id="sort" name="sort">
+            <option value="name">Nombre</option>
+            <option value="price">Precio</option>
+            <option value="stock">Stock</option>
+            <option value="rating">Valoracion</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="order">Direccion</label>
+          <select id="order" name="order">
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+          </select>
+        </div>
+        <button class="button button--secondary" type="reset">Limpiar</button>
+      </form>
+
+      <section class="catalog-section" aria-labelledby="results-title">
+        <div class="catalog-heading">
+          <div>
+            <p class="eyebrow">Catalogo</p>
+            <h2 id="results-title" tabindex="-1">Productos</h2>
+          </div>
+          <p class="results-summary" data-summary></p>
+        </div>
+
+        <div class="catalog-state" data-state aria-live="polite"></div>
+        <div class="product-grid" data-products></div>
+
+        <nav class="pagination" aria-label="Paginacion" data-pagination hidden>
+          <button class="button button--secondary" type="button" data-page-action="previous">Anterior</button>
+          <span data-page-label></span>
+          <button class="button button--secondary" type="button" data-page-action="next">Siguiente</button>
+        </nav>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div class="container">
+        <p>Capstone de Frontend Foundations Lab.</p>
+      </div>
+    </footer>
+
+    <dialog class="product-dialog" data-product-dialog aria-labelledby="dialog-title">
+      <form data-product-form novalidate>
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow" data-dialog-eyebrow>Producto</p>
+            <h2 id="dialog-title" data-dialog-title>Nuevo producto</h2>
+          </div>
+          <button class="icon-button" type="button" aria-label="Cerrar formulario" data-close-dialog>×</button>
+        </div>
+
+        <input type="hidden" name="id">
+
+        <div class="form-grid">
+          <div class="field field--full">
+            <label for="product-name">Nombre</label>
+            <input id="product-name" name="name" minlength="3" required aria-describedby="name-error">
+            <p id="name-error" class="field__error" data-error-for="name"></p>
+          </div>
+
+          <div class="field">
+            <label for="product-category">Categoria</label>
+            <input id="product-category" name="category" minlength="2" required aria-describedby="category-error">
+            <p id="category-error" class="field__error" data-error-for="category"></p>
+          </div>
+
+          <div class="field">
+            <label for="product-price">Precio</label>
+            <input id="product-price" name="price" type="number" min="0" step="0.01" required aria-describedby="price-error">
+            <p id="price-error" class="field__error" data-error-for="price"></p>
+          </div>
+
+          <div class="field">
+            <label for="product-stock">Stock</label>
+            <input id="product-stock" name="stock" type="number" min="0" step="1" required aria-describedby="stock-error">
+            <p id="stock-error" class="field__error" data-error-for="stock"></p>
+          </div>
+
+          <div class="field">
+            <label for="product-rating">Valoracion</label>
+            <input id="product-rating" name="rating" type="number" min="0" max="5" step="0.1" value="0" required aria-describedby="rating-error">
+            <p id="rating-error" class="field__error" data-error-for="rating"></p>
+          </div>
+
+          <div class="field field--full">
+            <label for="product-description">Descripcion</label>
+            <textarea id="product-description" name="description" maxlength="300"></textarea>
+          </div>
+
+          <label class="checkbox field--full">
+            <input name="featured" type="checkbox">
+            <span>Producto destacado</span>
+          </label>
+        </div>
+
+        <p class="status-message" role="status" data-dialog-status></p>
+
+        <div class="dialog-actions">
+          <button class="button button--secondary" type="button" data-close-dialog>Cancelar</button>
+          <button class="button" type="submit" data-save-product>Guardar producto</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite" data-toast hidden></div>
+  </body>
+</html>

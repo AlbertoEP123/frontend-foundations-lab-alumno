@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Itinerario practico de fundamentos frontend previo a Angular.">
+    <title>Frontend Foundations Lab</title>
+    <link rel="stylesheet" href="/shared/base.css">
+    <link rel="stylesheet" href="/site/styles.css">
+    <script type="module" src="/site/app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Saltar al contenido</a>
+
+    <header class="hero">
+      <div class="container hero__inner">
+        <div>
+          <p class="hero__eyebrow">Itinerario previo a Angular</p>
+          <h1>Frontend Foundations Lab</h1>
+          <p class="hero__summary">
+            Aprende y demuestra HTML, CSS, JavaScript, DOM, HTTP y TypeScript mediante ejercicios reales,
+            una API local y un proyecto final sin framework.
+          </p>
+        </div>
+        <aside class="progress-card" aria-labelledby="progress-title">
+          <h2 id="progress-title">Tu progreso</h2>
+          <p><strong data-progress-count>0 de 22</strong> ejercicios completados</p>
+          <progress data-progress value="0" max="22">0 %</progress>
+          <button class="button button--secondary" type="button" data-reset-progress>Reiniciar progreso</button>
+        </aside>
+      </div>
+    </header>
+
+    <main id="content" class="container main-content">
+      <section class="start-panel card" aria-labelledby="start-title">
+        <div>
+          <p class="section-kicker">Antes de empezar</p>
+          <h2 id="start-title">Trabaja por bloques y comprueba tus decisiones</h2>
+          <p>
+            Empieza por la prueba diagnóstica cuando no conozcas el nivel de la persona. Después ejecuta
+            <code>npm run dev</code>, abre cada starter y utiliza DevTools. Los ejercicios con tests indican
+            su comando en la ficha. El proyecto final sirve como puerta de entrada a Angular.
+          </p>
+          <p class="start-panel__actions">
+            <a class="button" href="/diagnostic/starter/">Abrir diagnóstico</a>
+            <a class="button button--secondary" href="/diagnostic/README.md">Ver enunciado</a>
+          </p>
+        </div>
+        <nav aria-label="Documentacion principal">
+          <a href="/docs/01-learning-path.md">Itinerario</a>
+          <a href="/docs/04-assessment-rubric.md">Rubrica</a>
+          <a href="/docs/06-accessibility-checklist.md">Accesibilidad</a>
+          <a href="/docs/07-angular-entry-criteria.md">Paso a Angular</a>
+        </nav>
+      </section>
+
+      <section aria-labelledby="catalog-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">22 retos progresivos</p>
+            <h2 id="catalog-title">Catalogo de ejercicios</h2>
+          </div>
+          <p class="results-count" role="status" aria-live="polite" data-results-count></p>
+        </div>
+
+        <form class="filters card" data-filters>
+          <div class="field">
+            <label for="exercise-search">Buscar</label>
+            <input id="exercise-search" name="search" type="search" placeholder="DOM, fetch, Grid...">
+          </div>
+          <div class="field">
+            <label for="module-filter">Bloque</label>
+            <select id="module-filter" name="module">
+              <option value="all">Todos</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="status-filter">Estado</label>
+            <select id="status-filter" name="status">
+              <option value="all">Todos</option>
+              <option value="pending">Pendientes</option>
+              <option value="completed">Completados</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="exercise-grid" data-exercise-grid></div>
+        <p class="empty-results card" data-empty-results hidden>No hay ejercicios que coincidan con los filtros.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Frontend Foundations Lab · Formacion practica previa a Angular.</p>
+      </div>
+    </footer>
+
+    <dialog class="exercise-dialog" data-dialog aria-labelledby="dialog-title">
+      <div class="exercise-dialog__header">
+        <div>
+          <p class="section-kicker" data-dialog-module></p>
+          <h2 id="dialog-title" data-dialog-title></h2>
+        </div>
+        <button class="icon-button" type="button" aria-label="Cerrar" data-close-dialog>×</button>
+      </div>
+      <p data-dialog-description></p>
+      <div class="dialog-columns">
+        <section>
+          <h3>Objetivos</h3>
+          <ul data-dialog-objectives></ul>
+        </section>
+        <section>
+          <h3>Criterios clave</h3>
+          <ul data-dialog-acceptance></ul>
+        </section>
+      </div>
+      <p class="command" data-dialog-command hidden></p>
+      <div class="exercise-dialog__actions">
+        <button class="button button--secondary" type="button" data-close-dialog>Volver</button>
+        <a class="button" data-dialog-open href="/">Abrir starter</a>
+      </div>
+    </dialog>
+
+    <template id="exercise-card-template">
+      <article class="exercise-card card">
+        <div class="exercise-card__topline">
+          <span class="exercise-number"></span>
+          <span class="exercise-badge"></span>
+        </div>
+        <div>
+          <p class="exercise-module"></p>
+          <h3 class="exercise-title"></h3>
+          <p class="exercise-description"></p>
+        </div>
+        <dl class="exercise-meta">
+          <div><dt>Tiempo</dt><dd data-duration></dd></div>
+          <div><dt>Formato</dt><dd data-format></dd></div>
+        </dl>
+        <div class="exercise-card__actions">
+          <label class="complete-control">
+            <input type="checkbox" data-complete>
+            <span>Completado</span>
+          </label>
+          <button class="button button--secondary" type="button" data-details>Ver detalle</button>
+          <a class="button" data-open href="/">Abrir</a>
+        </div>
+      </article>
+    </template>
+  </body>
+</html>

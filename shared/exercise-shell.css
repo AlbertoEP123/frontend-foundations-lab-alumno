@@ -1,0 +1,71 @@
+.exercise-nav {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+  backdrop-filter: blur(0.8rem);
+}
+
+.exercise-nav__inner {
+  display: flex;
+  min-height: 4rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.exercise-nav__identity {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.exercise-nav__identity strong {
+  line-height: 1.2;
+}
+
+.exercise-nav__identity span {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+}
+
+.exercise-shell {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-6) var(--space-7);
+}
+
+.exercise-intro {
+  display: grid;
+  gap: var(--space-3);
+  padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+.exercise-intro > * {
+  margin-block: 0;
+}
+
+.exercise-workspace {
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.todo-note {
+  padding: 0.8rem 1rem;
+  border-inline-start: 0.3rem solid var(--color-warning);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-warning) 10%, var(--color-surface));
+}
+
+.status-message {
+  min-height: 1.6em;
+  margin-block: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.status-message[data-kind='error'] {
+  color: var(--color-danger);
+}
+
+.status-message[data-kind='success'] {
+  color: var(--color-success);
+}

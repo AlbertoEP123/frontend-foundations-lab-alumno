@@ -1,0 +1,23 @@
+{
+  "name": "frontend-foundations-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Itinerario practico de HTML, CSS, JavaScript, Web APIs y TypeScript previo a Angular.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node server/start.mjs",
+    "check": "node scripts/validate-repo.mjs",
+    "list": "node scripts/list-exercises.mjs",
+    "test": "node --test tests/api.test.mjs tests/repository.test.mjs tests/static-server.test.mjs",
+    "test:exercise": "node scripts/test-exercise.mjs",
+    "typecheck": "tsc --project tsconfig.json",
+    "verify": "npm run check && npm run typecheck && npm test",
+    "typecheck:exercise": "node scripts/typecheck-exercise.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

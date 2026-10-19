@@ -1,0 +1,338 @@
+.hero {
+  border-bottom: 1px solid var(--color-border);
+  background:
+    radial-gradient(circle at 90% 0%, color-mix(in srgb, var(--color-primary) 22%, transparent), transparent 32rem),
+    var(--color-surface);
+}
+
+.hero__inner {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: clamp(3rem, 8vw, 6rem);
+}
+
+.hero h1 {
+  max-width: 12ch;
+  margin-block: 0.2rem var(--space-4);
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  letter-spacing: -0.055em;
+}
+
+.hero__eyebrow,
+.section-kicker,
+.exercise-module {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero__summary {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: clamp(1.05rem, 2.3vw, 1.35rem);
+}
+
+.progress-card {
+  align-self: end;
+  padding: var(--space-5);
+}
+
+.progress-card > *:first-child {
+  margin-top: 0;
+}
+
+.progress-card progress {
+  width: 100%;
+  height: 0.9rem;
+  margin-block: var(--space-2) var(--space-4);
+  accent-color: var(--color-primary);
+}
+
+.main-content {
+  display: grid;
+  gap: var(--space-7);
+  padding-block: var(--space-7);
+}
+
+.start-panel {
+  display: grid;
+  gap: var(--space-5);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.start-panel h2 {
+  margin-block: var(--space-2) var(--space-3);
+}
+
+.start-panel p:last-child {
+  margin-bottom: 0;
+}
+
+.start-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.start-panel nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  align-content: start;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.section-heading h2 {
+  margin-block: var(--space-2) 0;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.results-count {
+  margin: 0;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.filters {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+}
+
+.exercise-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.exercise-card {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.exercise-card[data-completed='true'] {
+  border-color: color-mix(in srgb, var(--color-success) 55%, var(--color-border));
+  background: color-mix(in srgb, var(--color-success) 6%, var(--color-surface));
+}
+
+.exercise-card__topline,
+.exercise-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.exercise-number {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.exercise-badge {
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.exercise-title {
+  margin-block: var(--space-2) var(--space-3);
+  font-size: 1.3rem;
+}
+
+.exercise-description {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.exercise-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  margin: 0;
+  padding-block: var(--space-3);
+  border-block: 1px solid var(--color-border);
+}
+
+.exercise-meta div {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.exercise-meta dt {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.exercise-meta dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.complete-control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.complete-control input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-success);
+}
+
+.empty-results {
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.site-footer .container {
+  padding-block: var(--space-5);
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.exercise-dialog {
+  width: min(46rem, calc(100% - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-md);
+}
+
+.exercise-dialog::backdrop {
+  background: rgb(8 12 20 / 70%);
+}
+
+.exercise-dialog > * {
+  margin-inline: var(--space-5);
+}
+
+.exercise-dialog__header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.exercise-dialog__header h2 {
+  margin-block: var(--space-2) 0;
+}
+
+.icon-button {
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1.5rem;
+}
+
+.dialog-columns {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.dialog-columns h3 {
+  margin-bottom: var(--space-2);
+}
+
+.dialog-columns ul {
+  padding-left: 1.2rem;
+}
+
+.command {
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-muted);
+  font-family: "Cascadia Code", monospace;
+}
+
+.exercise-dialog__actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: end;
+  gap: var(--space-3);
+  margin: var(--space-5) 0 0;
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+@media (min-width: 44rem) {
+  .filters {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .exercise-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dialog-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 2fr) minmax(18rem, 0.8fr);
+  }
+
+  .start-panel {
+    grid-template-columns: minmax(0, 2fr) minmax(15rem, 0.8fr);
+  }
+
+  .exercise-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 35rem) {
+  .section-heading,
+  .exercise-card__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .exercise-card__actions .button {
+    width: 100%;
+  }
+
+  .exercise-dialog__actions {
+    flex-direction: column-reverse;
+  }
+}
