@@ -46,7 +46,6 @@ http://localhost:4173/api/health
 npm run dev                         # portal, ejercicios y API local
 npm run list                        # lista ejercicios y comandos
 npm run check                       # valida la estructura del repositorio
-npm run typecheck                   # comprueba los ejercicios TypeScript
 npm test                            # prueba API, estructura y starters
 npm run verify                      # ejecuta todas las comprobaciones
 npm run test:exercise -- 08         # prueba el starter del ejercicio 08

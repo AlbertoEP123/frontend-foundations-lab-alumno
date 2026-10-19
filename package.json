@@ -13,8 +13,7 @@
     "list": "node scripts/list-exercises.mjs",
     "test": "node --test tests/api.test.mjs tests/repository.test.mjs tests/static-server.test.mjs",
     "test:exercise": "node scripts/test-exercise.mjs",
-    "typecheck": "tsc --project tsconfig.json",
-    "verify": "npm run check && npm run typecheck && npm test",
+    "verify": "npm run check && npm test",
     "typecheck:exercise": "node scripts/typecheck-exercise.mjs"
   },
   "devDependencies": {

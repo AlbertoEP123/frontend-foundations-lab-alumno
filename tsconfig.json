@@ -16,10 +16,5 @@
     "noFallthroughCasesInSwitch": true,
     "noEmit": true,
     "skipLibCheck": true
-  },
-  "include": [
-    "exercises/19-ts-domain-modeling/starter/**/*.ts",
-    "exercises/20-ts-generic-api-client/starter/**/*.ts",
-    "exercises/21-ts-state-and-utility-types/starter/**/*.ts"
-  ]
+  }
 }

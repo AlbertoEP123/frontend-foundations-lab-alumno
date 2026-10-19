@@ -40,7 +40,7 @@ for (const requiredPath of [
 }
 
 const packageJson = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
-for (const requiredScript of ['dev', 'check', 'test', 'typecheck', 'verify']) {
+for (const requiredScript of ['dev', 'check', 'test', 'verify', 'test:exercise', 'typecheck:exercise']) {
   if (!packageJson.scripts?.[requiredScript]) errors.push(`Falta script npm: ${requiredScript}`);
 }
 
