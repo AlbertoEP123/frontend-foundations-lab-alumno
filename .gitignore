@@ -6,3 +6,6 @@ coverage/
 dist/
 .env
 .vscode/settings.json
+
+# graphify-axet
+.graphify/

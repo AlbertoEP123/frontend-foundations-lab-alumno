@@ -11,36 +11,36 @@
   </head>
   <body>
     <!-- TODO: sustituye la estructura generica por HTML semantico. -->
-    <div class="page container">
-      <div class="site-heading">
-        <div class="brand">Web Platform Notes</div>
-        <div class="menu">
-          <span>Inicio</span>
-          <span>Articulos</span>
-          <span>Recursos</span>
-        </div>
-      </div>
+    <main class="page container">
+      <header class="site-heading">
+        <h1 class="brand">Web Platform Notes</h1>
+        <nav class="menu">
+          <a href="">Inicio</a>
+          <a href="">Articulos</a>
+          <a href="">Recursos</a>
+        </nav>
+      </header>
 
-      <div class="content">
-        <div class="article">
-          <div class="title">Por que aprender la plataforma antes del framework</div>
-          <div class="metadata">Publicado el 7 de octubre de 2026</div>
-          <div class="subtitle">Las abstracciones son mas utiles cuando sabemos que abstraen.</div>
+      <section class="content">
+        <article class="article">
+          <h2>Por que aprender la plataforma antes del framework</h2>
+          <p class="metadata">Publicado el 7 de octubre de 2026</p>
+          <h2 class="subtitle">Las abstracciones son mas utiles cuando sabemos que abstraen.</h2>
           <p>HTML, CSS y JavaScript forman el entorno de ejecucion real de cualquier aplicacion Angular.</p>
-          <div class="subtitle">Una base que permite depurar</div>
+          <h2 class="subtitle">Una base que permite depurar</h2>
           <p>Cuando aparece un fallo de eventos, red o layout, el framework no elimina la necesidad de entender el navegador.</p>
-          <span class="fake-button">Leer la documentacion de MDN</span>
-        </div>
+          <button class="fake-button">Leer la documentacion de MDN</button>
+        </article>
 
-        <div class="related">
-          <div class="subtitle">Recursos relacionados</div>
-          <div>HTML semantico</div>
-          <div>Eventos del DOM</div>
-          <div>Fetch API</div>
-        </div>
-      </div>
+        <aside class="related">
+          <h2 class="subtitle">Recursos relacionados</h2>
+          <p><a href="">HTML semantico</a></p>
+          <p><a href="">Eventos del DOM</a></p>
+          <p><a href="">Fetch API</a></p>
+        </aside>
+      </section>
 
-      <div class="footer">Frontend Foundations Lab</div>
-    </div>
+      <footer class="footer"><p>Frontend Foundations Lab</p></footer>
+    </main>
   </body>
 </html>

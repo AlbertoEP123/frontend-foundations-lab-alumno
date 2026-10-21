@@ -1,65 +1,67 @@
 <!doctype html>
 <html lang="es" data-exercise-id="02-html-accessible-form" data-exercise-title="02 · Formulario accesible">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starter · Formulario accesible</title>
-    <link rel="stylesheet" href="/shared/base.css">
-    <link rel="stylesheet" href="/shared/exercise-shell.css">
-    <link rel="stylesheet" href="./styles.css">
-    <script type="module" src="/shared/exercise-nav.mjs"></script>
-  </head>
-  <body>
-    <main class="container exercise-shell">
-      <section class="exercise-intro card">
-        <p>HTML y accesibilidad</p>
-        <h1>Alta en el programa de formacion</h1>
-        <p class="todo-note">Completa la semantica, tipos, restricciones, ayudas y agrupaciones del formulario.</p>
-      </section>
 
-      <section class="exercise-workspace card">
-        <form class="registration-form" action="#success" method="get">
-          <div class="field">
-            <!-- TODO: label asociado y tipo correcto -->
-            <span>Nombre completo</span>
-            <input name="fullName" placeholder="Ej. Andrea Garcia">
-          </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starter · Formulario accesible</title>
+  <link rel="stylesheet" href="/shared/base.css">
+  <link rel="stylesheet" href="/shared/exercise-shell.css">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="/shared/exercise-nav.mjs"></script>
+</head>
 
-          <div class="field">
-            <span>Correo corporativo</span>
-            <input name="email" placeholder="nombre@empresa.com">
-            <p class="field__hint">Usaremos esta direccion para las convocatorias.</p>
-          </div>
+<body>
+  <main class="container exercise-shell">
+    <section class="exercise-intro card">
+      <p>HTML y accesibilidad</p>
+      <h1>Alta en el programa de formacion</h1>
+      <p class="todo-note">Completa la semantica, tipos, restricciones, ayudas y agrupaciones del formulario.</p>
+    </section>
 
-          <div class="field">
-            <span>Fecha de incorporacion</span>
-            <input name="startDate">
-          </div>
+    <section class="exercise-workspace card">
+      <form class="registration-form" action="#success" method="get">
 
-          <div class="field">
-            <span>Nivel de experiencia</span>
-            <select name="experience">
-              <option>Selecciona</option>
-              <option>Sin experiencia</option>
-              <option>Menos de un año</option>
-              <option>Uno a tres años</option>
-            </select>
-          </div>
+        <div class="field">
+          <!-- TODO: label asociado y tipo correcto -->
+          <label for="fullName">Nombre completo</label>
+          <input type="text" name="fullName" id="fullName" placeholder="Ej. Andrea Garcia">
+        </div>
 
-          <!-- TODO: agrupar opciones relacionadas -->
-          <div class="options">
-            <p>Disponibilidad preferida</p>
-            <label><input type="radio" name="schedule" value="morning"> Mañana</label>
-            <label><input type="radio" name="schedule" value="afternoon"> Tarde</label>
-          </div>
+        <div class="field">
+          <label for="email">Correo corporativo</label>
+          <input type="email" name="email" id="email" placeholder="correo@gmail.com">
+          <p class="field__hint">Usaremos esta direccion para las convocatorias.</p>
+        </div>
 
-          <div class="options">
-            <label><input type="checkbox" name="terms"> Acepto las normas del programa</label>
-          </div>
+        <div class="field">
+          <label for="startDate">Fecha de incorporacion</label>
+          <input type="date" name="startDate" id="startDate">
+        </div>
 
-          <div class="fake-submit">Enviar solicitud</div>
-        </form>
-      </section>
-    </main>
-  </body>
+        <div class="field">
+          <label for="experience">Selecciona</label>
+          <select name="experience" id="experience">
+            <option value="Sin experiencia" label="Sin experiencia">Sin experiencia</option>
+            <option value="Menos de un año" label="Menos de un año">Menos de un año</option>
+            <option value="Uno a tres años" label="Uno a tres años">Uno a tres años</option>
+          </select>
+        </div>
+
+        <fieldset class="options">
+          <legend>Disponibilidad preferida</legend>
+          <label><input type="radio" name="schedule" value="morning"> Mañana</label>
+          <label><input type="radio" name="schedule" value="afternoon"> Tarde</label>
+        </fieldset>
+
+        <div class="options">
+          <label><input type="checkbox" name="terms"> Acepto las normas del programa</label>
+        </div>
+
+        <button class="fake-submit" type="submit">Enviar solicitud</button>
+      </form>
+    </section>
+  </main>
+</body>
+
 </html>
