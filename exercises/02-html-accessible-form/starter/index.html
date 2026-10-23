@@ -23,25 +23,25 @@
       <form class="registration-form" action="#success" method="get">
 
         <div class="field">
-          <!-- TODO: label asociado y tipo correcto -->
           <label for="fullName">Nombre completo</label>
-          <input type="text" name="fullName" id="fullName" placeholder="Ej. Andrea Garcia">
+          <input type="text" name="fullName" id="fullName" placeholder="Ej. Andrea Garcia" autocomplete="name" minlength="2" required>
         </div>
 
         <div class="field">
           <label for="email">Correo corporativo</label>
-          <input type="email" name="email" id="email" placeholder="correo@gmail.com">
-          <p class="field__hint">Usaremos esta direccion para las convocatorias.</p>
+          <input type="email" name="email" id="email" placeholder="correo@gmail.com" autocomplete="email" aria-describedby="email-hint" required>
+          <p class="field__hint" id="email-hint">Usaremos esta direccion para las convocatorias.</p>
         </div>
 
         <div class="field">
           <label for="startDate">Fecha de incorporacion</label>
-          <input type="date" name="startDate" id="startDate">
+          <input type="date" name="startDate" id="startDate" required>
         </div>
 
         <div class="field">
-          <label for="experience">Selecciona</label>
-          <select name="experience" id="experience">
+          <label for="experience">Nivel de experiencia</label>
+          <select name="experience" id="experience" required>
+            <option value="" selected disabled>Selecciona una opción</option>
             <option value="Sin experiencia" label="Sin experiencia">Sin experiencia</option>
             <option value="Menos de un año" label="Menos de un año">Menos de un año</option>
             <option value="Uno a tres años" label="Uno a tres años">Uno a tres años</option>
@@ -50,12 +50,12 @@
 
         <fieldset class="options">
           <legend>Disponibilidad preferida</legend>
-          <label><input type="radio" name="schedule" value="morning"> Mañana</label>
+          <label><input type="radio" name="schedule" value="morning" required> Mañana</label>
           <label><input type="radio" name="schedule" value="afternoon"> Tarde</label>
         </fieldset>
 
         <div class="options">
-          <label><input type="checkbox" name="terms"> Acepto las normas del programa</label>
+          <label><input type="checkbox" name="terms" required> Acepto las normas del programa</label>
         </div>
 
         <button class="fake-submit" type="submit">Enviar solicitud</button>

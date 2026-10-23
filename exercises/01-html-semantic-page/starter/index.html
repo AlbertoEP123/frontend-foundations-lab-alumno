@@ -10,33 +10,36 @@
     <script type="module" src="/shared/exercise-nav.mjs"></script>
   </head>
   <body>
-    <!-- TODO: sustituye la estructura generica por HTML semantico. -->
     <main class="page container">
-      <header class="site-heading">
+      <header class="site-heading" id="top">
         <h1 class="brand">Web Platform Notes</h1>
         <nav class="menu">
-          <a href="">Inicio</a>
-          <a href="">Articulos</a>
-          <a href="">Recursos</a>
+          <ul>
+            <li><a href="#top">Inicio</a></li>
+            <li><a href="#article">Artículos</a></li>
+            <li><a href="#resources">Recursos</a></li>
+          </ul>
         </nav>
       </header>
 
       <section class="content">
-        <article class="article">
+        <article class="article" id="article">
           <h2>Por que aprender la plataforma antes del framework</h2>
-          <p class="metadata">Publicado el 7 de octubre de 2026</p>
-          <h2 class="subtitle">Las abstracciones son mas utiles cuando sabemos que abstraen.</h2>
+          <p class="metadata">Publicado el <time datetime="2026-10-07">7 de octubre de 2026</time></p>
+          <h3 class="subtitle">Las abstracciones son mas utiles cuando sabemos que abstraen.</h3>
           <p>HTML, CSS y JavaScript forman el entorno de ejecucion real de cualquier aplicacion Angular.</p>
-          <h2 class="subtitle">Una base que permite depurar</h2>
+          <h3 class="subtitle">Una base que permite depurar</h3>
           <p>Cuando aparece un fallo de eventos, red o layout, el framework no elimina la necesidad de entender el navegador.</p>
-          <button class="fake-button">Leer la documentacion de MDN</button>
+          <a class="fake-button" href="https://developer.mozilla.org/es/docs/Web/HTML">Leer la documentacion de MDN</a>
         </article>
 
-        <aside class="related">
+        <aside class="related" id="resources">
           <h2 class="subtitle">Recursos relacionados</h2>
-          <p><a href="">HTML semantico</a></p>
-          <p><a href="">Eventos del DOM</a></p>
-          <p><a href="">Fetch API</a></p>
+          <ul>
+            <li><a href="https://developer.mozilla.org/es/docs/Glossary/Semantics">HTML semantico</a></li>
+            <li><a href="https://developer.mozilla.org/es/docs/Web/API/Event">Eventos del DOM</a></li>
+            <li><a href="https://developer.mozilla.org/es/docs/Web/API/Fetch_API">Fetch API</a></li>
+          </ul>
         </aside>
       </section>
 

@@ -1,10 +1,23 @@
-/* TODO: crea el layout con CSS Grid. */
 .dashboard > * {
   margin-bottom: 1rem;
 }
+.dashboard {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "metrics"
+    "activity"
+    "next";
+}
 
+.metrics  { grid-area: metrics; }
+.activity { grid-area: activity; }
+.next     { grid-area: next; }
 .metrics {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 1rem;
 }
 
 .metric,
@@ -14,8 +27,6 @@
 }
 
 .metric {
-  width: 32%;
-  display: inline-block;
   vertical-align: top;
 }
 
@@ -31,13 +42,16 @@
   font-size: 2rem;
 }
 
-.activity {
-  width: 65%;
-  display: inline-block;
-}
+
 
 .next {
-  width: 32%;
-  display: inline-block;
   vertical-align: top;
+}
+@media (min-width: 42rem) {
+  .dashboard {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-areas:
+      "metrics metrics"
+      "activity next";
+  }
 }

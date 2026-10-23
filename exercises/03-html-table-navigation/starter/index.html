@@ -10,51 +10,34 @@
     <script type="module" src="/shared/exercise-nav.mjs"></script>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
-    <main class="container exercise-shell" id="main-content" tabindex="-1">
+    <a class="skip-link" href="#inventory">Saltar al inventario</a>
+    <main class="container exercise-shell">
       <section class="exercise-intro card">
         <h1>Inventario</h1>
         <p>Convierte este listado visual en una tabla de datos accesible.</p>
       </section>
 
       <section class="exercise-workspace card">
-        <table class="data-grid" id="inventory">
-          <caption>Inventario de productos</caption>
+        <table class="data-grid" id="inventory" tabindex="-1">
+          <caption>Inventario</caption>
           <thead>
-            <tr>
-              <th scope="col" aria-sort="none"><button type="button" data-sort="text">Producto</button></th>
-              <th scope="col" aria-sort="none"><button type="button" data-sort="text">Categoría</button></th>
-              <th scope="col" aria-sort="none"><button type="button" data-sort="number">Stock</button></th>
-              <th scope="col" aria-sort="none"><button type="button" data-sort="text">Estado</button></th>
-              <th scope="col">Acción</th>
+            <tr class="row row--header">
+              <th scope="col">Producto</th><th scope="col">Categoría</th><th scope="col">Stock</th><th scope="col">Estado</th><th scope="col">Acción</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">Teclado mecánico</th>
-              <td>Periféricos</td>
-              <td>18</td>
-              <td class="status status--ok">Disponible</td>
-              <td>Editar</td>
+            <tr class="row">
+              <th scope="row">Teclado mecánico</th><td>Periféricos</td><td>18</td><td class="status status--ok">Disponible</td><td><button type="button">Editar</button></td>
             </tr>
-            <tr>
-              <th scope="row">Monitor 27 pulgadas</th>
-              <td>Monitores</td>
-              <td>2</td>
-              <td class="status status--warning">Stock bajo</td>
-              <td>Editar</td>
+            <tr class="row">
+              <th scope="row">Monitor 27 pulgadas</th><td>Monitores</td><td>2</td><td class="status status--warning">Stock bajo</td><td><button type="button">Editar</button></td>
             </tr>
-            <tr>
-              <th scope="row">Webcam Full HD</th>
-              <td>Vídeo</td>
-              <td>0</td>
-              <td class="status status--danger">Agotado</td>
-              <td>Editar</td>
+            <tr class="row">
+              <th scope="row">Webcam Full HD</th><td>Vídeo</td><td>0</td><td class="status status--danger">Agotado</td><td><button type="button">Editar</button></td>
             </tr>
           </tbody>
         </table>
       </section>
     </main>
-    
   </body>
 </html>

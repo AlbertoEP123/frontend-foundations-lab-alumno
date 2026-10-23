@@ -1,18 +1,21 @@
-/* TODO: empieza por movil y añade responsive, estados y reduced motion. */
+html {
+  min-width: 0;
+}
+
 .responsive-layout {
-  width: 1100px;
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 32px;
 }
 
 .summary,
 .form-panel {
-  padding: 32px;
+  min-width: 0;
+  padding: clamp(1rem, 3vw, 2.5rem);
 }
 
 .summary h1 {
-  font-size: 48px;
+  font-size: clamp(1.5rem, 4vw, 3.25rem);
 }
 
 .summary__eyebrow {
@@ -22,12 +25,20 @@
 
 .responsive-form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 20px;
+}
+.responsive-form :disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .field--full {
   grid-column: 1 / -1;
+}
+label {
+    font-size: clamp(1rem, 1vw, 2.5rem);
+
 }
 
 .validation-hint {
@@ -35,12 +46,12 @@
   font-size: 14px;
 }
 
-input:focus,
-textarea:focus {
-  outline: none;
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-primary);
 }
 
-input:invalid {
+input:invalid:not(:placeholder-shown) {
   border-color: red;
 }
 
@@ -50,4 +61,23 @@ input:invalid {
 
 .button:hover {
   transform: translateY(-4px);
+}
+
+@media(prefers-reduced-motion: reduce){
+  .button {
+  transition: none;
+}
+
+.button:hover {
+  transform: none;
+}
+}
+@media (min-width: 42rem) {
+  .responsive-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+
+  .responsive-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

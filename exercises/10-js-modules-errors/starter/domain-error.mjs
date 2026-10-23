@@ -1,8 +1,8 @@
 export class DomainError extends Error {
   constructor(code, message, options = {}) {
-    // TODO: conserva details y cause.
-    super(message);
+    super(message, { cause: options.cause });
     this.name = 'DomainError';
     this.code = code;
+    this.details = options.details;
   }
 }
