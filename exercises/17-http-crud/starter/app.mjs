@@ -11,12 +11,38 @@ async function requestJson(url, options = {}) {
 }
 
 async function loadProducts() {
-  // TODO
+
+  try {
+    const data = await requestJson('/api/products');
+    products = data.items;
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 async function saveProduct(event) {
   event.preventDefault();
-  // TODO
+
+  const fields = new FormData(form);
+  const id = fields.get('id');
+
+  const product = {
+    name: fields.get('name'),
+    category: fields.get('category'),
+    price: Number(fields.get('price')),
+    stock: Number(fields.get('stock'))
+  };
+
+  const url = id ? `/api/products/${id}` : '/api/products';
+  const method = id ? 'PATCH' : 'POST';
+
+  await requestJson(url, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(product)
+  });
+
+  await loadProducts();
 }
 
 function startEdit(product) {
@@ -28,11 +54,19 @@ function cancelEdit() {
 }
 
 async function deleteProduct(id) {
-  // TODO
+  const url = `/api/products/${id}`;
+  const method = 'DELETE';
+  
+  await JSON(url, {
+    method,
+  });
+  
+
+
 }
 
 form.addEventListener('submit', saveProduct);
 document.querySelector('[data-cancel]').addEventListener('click', cancelEdit);
 document.querySelector('[data-refresh]').addEventListener('click', loadProducts);
-tableBody.addEventListener('click', () => {});
+tableBody.addEventListener('click', () => { });
 loadProducts();
