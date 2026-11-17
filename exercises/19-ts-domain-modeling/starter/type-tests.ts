@@ -1,7 +1,11 @@
 import { formatProductStatus, isProduct, type Product, type ProductDraft, type ProductStatus } from './model.js';
 
 const active: ProductStatus = 'ACTIVE';
+const inactive: ProductStatus = 'INACTIVE';
+const discontinued: ProductStatus = 'DISCONTINUED';
 formatProductStatus(active);
+
+
 
 // Debe fallar cuando ProductStatus este correctamente restringido.
 // @ts-expect-error ARCHIVED no es un estado soportado.
@@ -13,6 +17,7 @@ void draft;
 
 // Debe fallar porque ProductDraft no contiene id.
 // @ts-expect-error El identificador lo asigna el backend.
+
 const invalidDraft: ProductDraft = { id: 'x', name: 'Monitor', price: 200, stock: 2, status: 'ACTIVE' };
 void invalidDraft;
 

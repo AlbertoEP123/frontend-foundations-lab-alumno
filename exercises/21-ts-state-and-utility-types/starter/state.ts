@@ -7,26 +7,50 @@ export interface Product {
   readonly createdAt: string;
 }
 
-// TODO: deriva los DTOs con utility types.
-export type ProductCreate = Product;
-export type ProductPatch = Product;
-export type ProductCardView = Product;
+export type ProductCreate = Omit<Product, 'id' | 'createdAt'>;
 
-// TODO: sustituye flags por una union discriminada.
-export interface LoadState<T> {
-  loading: boolean;
-  data?: T;
-  error?: string;
-}
+export type ProductPatch = Partial<
+  Omit<Product, 'id' | 'createdAt'>
+>;
+
+export type ProductCardView = Pick<Product, 'id' | 'name' | 'price'>;
+
+export type LoadState<T> =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: string };
 
 export function mapState<T, R>(state: LoadState<T>, mapper: (value: T) => R): LoadState<R> {
-  // TODO
-  return state as unknown as LoadState<R>;
+  switch (state.status) {
+    case 'idle':
+      return { status: 'idle' };
+    case 'loading':
+      return { status: 'loading' };
+    case 'success':
+      return { status: 'success', data: mapper(state.data) };
+    case 'error':
+      return { status: 'error', error: state.error };
+    default:
+      return assertNever(state);
+  }
 }
 
 export function stateLabel<T>(state: LoadState<T>): string {
-  // TODO
-  if (state.loading) return 'Cargando';
-  if (state.error) return state.error;
-  return state.data ? 'Completado' : 'Inactivo';
+  switch (state.status) {
+    case 'idle':
+      return 'Inactivo';
+    case 'loading':
+      return 'Cargando';
+    case 'success':
+      return 'Completado';
+    case 'error':
+      return state.error;
+    default:
+      return assertNever(state);
+  }
+}
+
+function assertNever(value: never): never {
+  throw new Error(`Estado de carga no contemplado: ${value}`);
 }
