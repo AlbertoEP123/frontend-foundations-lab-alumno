@@ -42,7 +42,6 @@ form {
     border-radius: 8px;
     background-color: #f8fafc;
     color: #1e293b;
-
 }
 
 .fieldSetContenedor :hover,
@@ -87,34 +86,106 @@ form {
     flex-direction: column;
     gap: 20px;
     justify-content: center;
+    align-items: center;
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 75%;
+    width: 40em;
 }
 
-.modal-content div {
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
+}
+
+.form-row div {
     display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+#productForm input {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+#productForm label,
+#productForm input,
+#productForm select,
+#productForm button {
+    width: 100%;
+    max-width: none;
+}
+
+#productForm input,
+#productForm select {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #c7d2fe;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+#productForm button {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#productForm button:hover {
+    background-color: #4338ca;
+}
+
+button.delete-button {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.delete-button:hover {
+    background-color: #dc2626;
+}
+
+.modal-content > div {
+    display: flex;
+    width: 100%;
+    max-width: 32em;
     flex-direction: row;
     justify-content: space-between;
-    align-items: ceter;
-    vertical-align: center;
     background-color: rgba(128, 128, 128, 0.303);
-    padding: 0 2em 0 2em;
+    padding: 0 2em;
     border-bottom: 2px solid rgba(60, 0, 255, 0.511);
     border-radius: 2em;
-
+    box-sizing: border-box;
 }
 
 #productForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    align-items: center;
-    width: 20%;
-
+    align-items: stretch;
+    width: 100%;
+    max-width: 32em;
+    gap: 1rem;
 }
 
 .close {
