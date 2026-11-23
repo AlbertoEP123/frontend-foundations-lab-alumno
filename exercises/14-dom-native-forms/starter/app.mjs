@@ -7,19 +7,37 @@ function clearErrors() {
   for (const error of form.querySelectorAll('[data-error-for]')) {
     error.textContent = '';
   }
+
+  for (const control of form.elements) {
+    if (control instanceof HTMLElement && 'removeAttribute' in control) {
+      control.removeAttribute('aria-invalid');
+    }
+  }
 }
 
 function showValidationErrors() {
+  let firstInvalid = null;
+
   for (const control of form.elements) {
+    if (!control.name || typeof control.checkValidity !== 'function') {
+      continue;
+    }
+
     if (!control.checkValidity()) {
       const error = form.querySelector(`[data-error-for="${control.name}"]`);
       if (error) {
         error.textContent = control.validationMessage;
       }
-      return control;
+
+      control.setAttribute('aria-invalid', 'true');
+
+      if (!firstInvalid) {
+        firstInvalid = control;
+      }
     }
   }
-  return null;
+
+  return firstInvalid;
 }
 
 function toProductDraft(formData) {
@@ -29,6 +47,16 @@ function toProductDraft(formData) {
     stock: Number(formData.get('stock')),
     featured: formData.has('featured'),
   };
+}
+
+function renderProducts() {
+  list.textContent = '';
+
+  for (const product of products) {
+    const item = document.createElement('li');
+    item.textContent = `${product.name} — ${product.category} — ${product.price} €`;
+    list.append(item);
+  }
 }
 
 form.addEventListener('submit', (event) => {
@@ -44,11 +72,10 @@ form.addEventListener('submit', (event) => {
 
   const product = toProductDraft(new FormData(form));
   products.push(product);
-  const aviso = document.createElement('p');
-  aviso.textContent = `Producto ${product.name} añadido`;
-  status.append(aviso);
-  const item = document.createElement('li');
-  item.textContent = `${product.name} — ${product.category} — ${product.price} €`;
-  list.append(item);
+  renderProducts();
 
+  status.textContent = `Producto ${product.name} añadido`;
+
+  form.reset();
+  form.elements.name.focus();
 });
