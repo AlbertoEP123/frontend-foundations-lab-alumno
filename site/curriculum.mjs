@@ -297,6 +297,6 @@ export const exercises = [
     description: 'Integra plataforma web, JavaScript, DOM, HTTP, accesibilidad y arquitectura sin framework.',
     objectives: ['Listado remoto', 'CRUD', 'URL y storage', 'Accesibilidad y responsive'],
     acceptance: ['Cumple los mínimos de la rúbrica', 'Se defiende en revisión', 'No depende de código copiado'],
-    starterUrl: '/capstone/starter/'
+    starterUrl: '/exercises/22-Capstone-Product Explorer/starter/'
   }
 ];

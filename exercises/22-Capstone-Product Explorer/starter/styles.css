@@ -1,8 +1,8 @@
 body {
     min-height: 100vh;
     margin: 0;
-    background: linear-gradient(135deg, #f0f9ff, #eef2ff);
-    color: #1e293b;
+    background: var(--color-bg);
+    color: var(--color-text);
     font-family: Arial, sans-serif;
 }
 
@@ -24,11 +24,16 @@ form {
     padding: 1.5rem;
     gap: 1rem;
     border: 2px solid #6366f1;
+    background: var(--color-surface);
     border-radius: 0 0 18px 18px;
-    background-color: #ffffff;
     box-shadow: 0 12px 30px rgba(49, 46, 129, 0.14);
 }
-
+.pagination{
+    display:flex;
+    justify-content:center;
+    gap:2em;
+    vertical-align:center;
+}
 .fieldSetContenedor legend {
     padding: 0 0.5rem;
     color: #4338ca;
@@ -40,8 +45,7 @@ form {
     padding: 0.6rem 0.75rem;
     border: 1px solid #c7d2fe;
     border-radius: 8px;
-    background-color: #f8fafc;
-    color: #1e293b;
+    background: var(--color-surface);
 }
 
 .fieldSetContenedor :hover,
@@ -50,48 +54,21 @@ form {
 
 }
 
-.fieldSetContenedor button {
-    padding: 0.65rem 1rem;
-    border: 0;
-    border-radius: 8px;
-    background-color: #4f46e5;
-    color: #ffffff;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.fieldSetContenedor button:hover {
-    background-color: #4338ca;
-}
 
 .modal {
-    display: none;
-    /* Oculto por defecto */
-    position: fixed;
-    /* Queda en la misma posición en la pantalla */
-    z-index: 1;
-    /* Aparece por encima de otros elementos */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    /* Scroll si es necesario */
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    padding: 0;
+    border: none;
+    max-width: 40em;
+    width: calc(100% - 2rem);
+    background-color: #fefefe;
 }
 
-.modal-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 40em;
+.modal[open] {
+    display: block;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .form-row {
@@ -131,51 +108,20 @@ form {
     padding: 0.5rem;
     border-radius: 8px;
     border: 1px solid #c7d2fe;
-    background-color: #f8fafc;
-    color: #1e293b;
 }
 
-#productForm button {
-    background-color: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#productForm button:hover {
-    background-color: #4338ca;
-}
-
-button.delete-button {
-    background-color: #4f46e5;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button.delete-button:hover {
-    background-color: #dc2626;
-}
-
-.modal-content > div {
+.modal>div {
     display: flex;
-    width: 100%;
-    max-width: 32em;
-    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 1.5rem;
     background-color: rgba(128, 128, 128, 0.303);
-    padding: 0 2em;
     border-bottom: 2px solid rgba(60, 0, 255, 0.511);
-    border-radius: 2em;
     box-sizing: border-box;
+    background: var(--color-surface-muted);
+
 }
 
 #productForm {
@@ -184,17 +130,24 @@ button.delete-button:hover {
     justify-content: center;
     align-items: stretch;
     width: 100%;
-    max-width: 32em;
     gap: 1rem;
+    background: var(--color-surface-muted);
+
 }
 
 .close {
-    color: #aaa;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    font-size: 20px;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: #4338ca;
+    font-size: 1.5rem;
     font-weight: bold;
-
 }
 
 .close:hover,
@@ -205,19 +158,20 @@ button.delete-button:hover {
 }
 
 .tablaProductos {
-    display: flex;
+    display: block;
     min-height: 60vh;
-    justify-content: center;
     margin: 0 2em 0 2em;
     padding: 1rem;
     box-sizing: border-box;
     border: 2px solid #6366f1;
-    background-color: #ffffff;
+    background: var(--color-surface);
     box-shadow: 0 12px 30px rgba(49, 46, 129, 0.14);
+    overflow-x: auto;
 }
 
 .tablaProductos table {
     width: 100%;
+    min-width: 720px;
     border-collapse: separate;
     border-spacing: 0 10px;
     table-layout: fixed;
@@ -235,7 +189,13 @@ button.delete-button:hover {
 }
 
 .tablaProductos td {
-    background-color: #fff;
     padding: 0.5rem;
     border-radius: 8px;
+}
+
+@media (max-width: 320px) {
+    .tablaProductos {
+        margin: 0 0.2rem;
+        padding: 0.2rem;
+    }
 }

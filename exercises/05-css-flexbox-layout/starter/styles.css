@@ -1,3 +1,7 @@
+:root {
+  --space-md: 1rem; 
+}
+
 .toolbar {
   display: flex;
   padding: var(--space-md);

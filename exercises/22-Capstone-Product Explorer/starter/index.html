@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" data-exercise-id="22-Capstone-Product Explorer" data-exercise-title="22 - Ejercicio final">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../shared/base.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 22 - Alberto Enrique Pulido</title>
+</head>
+
+<body>
+    <main>
+        <section aria-labelledby="filters-title">
+            <form>
+                <fieldset class="fieldSetContenedor">
+                    <legend>Filtros de productos</legend>
+
+                    <label for="search">Buscar</label>
+                    <input id="search" name="search" type="search" minlength="3" required>
+
+                    <label for="category">Categoría</label>
+                    <select id="category" name="category" class="optionsCategory" size="2">
+                        <option value="">Todas</option>
+                        <option value="Conectividad">Conectividad</option>
+                        <option value="Audio">Audio</option>
+                        <option value="Ergonomía">Ergonomía</option>
+                        <option value="Energía">Energía</option>
+                        <option value="Almacenamiento">Almacenamiento</option>
+                    </select>
+
+                    <label for="sort">Ordenar por</label>
+                    <select id="sort" name="sort">
+                        <option value="name">Nombre</option>
+                        <option value="price">Precio</option>
+                        <option value="rating">Valoración</option>
+                        <option value="stock">Stock</option>
+                    </select>
+
+                    <label for="direction">Dirección</label>
+                    <select id="direction" name="direction">
+                        <option value="asc">Ascendente</option>
+                        <option value="desc">Descendente</option>
+                    </select>
+
+                    <button type="reset" class="button button--secondary">Limpiar</button>
+                    <button type="button" id="openModal" class="button">Nuevo producto</button>
+                </fieldset>
+            </form>
+        </section>
+
+        <section aria-labelledby="results-title" class="tablaProductos">
+            <p id="listStatus" role="status" aria-live="polite"></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre producto</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody data-table-datos></tbody>
+            </table>
+            <div id="pagination" class="pagination" aria-label="Paginación de productos"></div>
+        </section>
+    </main>
+
+    <dialog id="myModal" class="modal" aria-labelledby="dialog-title">
+        <div>
+            <h2 id="dialog-title">Nuevo producto</h2>
+            <button type="button" class="close" aria-label="Cerrar">&times;</button>
+        </div>
+        <form id="productForm">
+            <div class="form-row">
+                <div>
+                    <label for="nombreProducto">Nombre producto</label>
+                    <input id="nombreProducto" name="name" type="text" required>
+                </div>
+                <div>
+                    <label for="categoriaProducto">Categoría</label>
+                    <input id="categoriaProducto" name="category" type="text" required>
+                </div>
+                <div>
+                    <label for="precioProducto">Precio</label>
+                    <input id="precioProducto" name="price" type="number" min="0" step="0.01" required>
+                </div>
+                <div>
+                    <label for="ratingProducto">Rating</label>
+                    <input id="ratingProducto" name="rating" type="number" min="0" max="5" step="0.1" value="3"
+                        required>
+                </div>
+                <div>
+                    <label for="stockProducto">Stock</label>
+                    <input id="stockProducto" name="stock" type="number" min="0" step="1" required>
+                </div>
+                <div>
+                    <label for="descriptionProducto">Descripción</label>
+                    <input id="descriptionProducto" name="description" type="text" required>
+                </div>
+            </div>
+            <button type="submit" class="button">Añadir producto</button>
+        </form>
+    </dialog>
+</body>
+
+</html>

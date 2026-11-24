@@ -5,13 +5,19 @@ const listStatus = document.querySelector('[data-list-status]');
 let products = [];
 
 async function requestJson(url, options = {}) {
+  const isJson = (response) => response.headers.get('content-type')?.includes('application/json');
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    const data = await response.json();
-    const error = new Error(data.error?.message ?? `La petición falló (${response.status}).`);
+    let error;
+    if (isJson(response)) {
+      const data = await response.json();
+      error = new Error(data.error?.message ?? `La petición falló (${response.status}).`);
+      error.details = data.error?.details;
+    } else {
+      error = new Error(`La petición falló (${response.status}).`);
+    }
     error.status = response.status;
-    error.details = data.error?.details;
     throw error;
   }
 
@@ -77,6 +83,7 @@ function renderProducts() {
 
 async function saveProduct(event) {
   event.preventDefault();
+  form.querySelector('button[type="submit"]').disabled = true;
   document.querySelectorAll('[data-error-for]').forEach((message) => {
     message.textContent = '';
   });
@@ -103,6 +110,7 @@ async function saveProduct(event) {
       body: JSON.stringify(product)
     });
 
+    form.querySelector('button[type="submit"]').disabled = false;
     await loadProducts();
     formStatus.textContent = id ? 'Producto actualizado.' : 'Producto creado.';
   } catch (error) {
@@ -142,6 +150,10 @@ function cancelEdit() {
 }
 
 async function deleteProduct(id) {
+  const buttonDelete = document.querySelector(`button[data-id="${id}"][data-action="delete"]`);
+  const buttonEdit = document.querySelector(`button[data-id="${id}"][data-action="edit"]`);
+  buttonDelete.disabled = true;
+  buttonEdit.disabled = true;
 
   const confirmacion = confirm("¿Eliminar producto?");
   if (!confirmacion) return;
@@ -149,11 +161,15 @@ async function deleteProduct(id) {
   const url = `/api/products/${id}`;
   const method = 'DELETE';
 
-  await requestJson(url, {
-    method,
-  });
-  await loadProducts();
-
+  try {
+    await requestJson(url, { method });
+    await loadProducts();
+  } catch (error) {
+    listStatus.textContent = `No se pudo borrar el producto: ${error.message}`;
+  } finally {
+    buttonDelete.disabled = false;
+    buttonEdit.disabled = false;
+  }
 }
 
 form.addEventListener('submit', saveProduct);

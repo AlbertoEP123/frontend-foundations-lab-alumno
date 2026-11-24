@@ -1,3 +1,4 @@
+// Variables de elementos
 const modal = document.getElementById("myModal");
 const openModalButton = document.getElementById("openModal");
 const closeModalButton = document.querySelector(".close");
@@ -11,21 +12,29 @@ const categorySelect = document.getElementById("category");
 const baseCategories = ["Conectividad", "Audio", "Ergonomía", "Energía", "Almacenamiento"];
 
 const STORAGE_KEY = "capstone-products";
+
+let lastFocusedElement = null;
 let products = [];
 let visibleProducts = [];
 
+let currentPage = 1;
+const PAGE_SIZE = 8;
+let totalPages = 1;
+
+// Eventos 
+
 openModalButton.addEventListener("click", () => {
-  modal.style.display = "block";
+  lastFocusedElement = document.activeElement;
+  modal.showModal();
 });
 
 closeModalButton.addEventListener("click", () => {
-  modal.style.display = "none";
+  closeModal();
 });
 
-window.addEventListener("click", (event) => {
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
+modal.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeModal();
 });
 
 searchInput?.addEventListener("input", () => {
@@ -44,6 +53,49 @@ categorySelect?.addEventListener("change", () => {
   applySearchAndRender();
 });
 
+// Funciones
+
+function closeModal() {
+  modal.close();
+  if (lastFocusedElement instanceof HTMLElement) {
+    lastFocusedElement.focus();
+  }
+}
+
+function renderPagination() {
+  const pagination = document.getElementById('pagination');
+  if (!pagination) return;
+  pagination.innerHTML = '';
+
+  const buttonPrev = document.createElement('button');
+  buttonPrev.textContent = 'Anterior';
+  buttonPrev.disabled = currentPage === 1;
+  buttonPrev.onclick = () => {
+    if (currentPage > 1) {
+      currentPage--;
+      applySearchAndRender();
+    }
+  };
+  pagination.appendChild(buttonPrev);
+
+  const info = document.createElement('span');
+  info.textContent = `Página ${currentPage} de ${totalPages}`;
+  pagination.appendChild(info);
+
+  const buttonNext = document.createElement('button');
+  buttonNext.textContent = 'Siguiente';
+  buttonNext.disabled = currentPage === totalPages;
+  buttonNext.onclick = () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      applySearchAndRender();
+    }
+  };
+  pagination.appendChild(buttonNext);
+}
+
+
+
 async function requestJson(url, options = {}) {
   const response = await fetch(url, options);
 
@@ -59,13 +111,17 @@ async function requestJson(url, options = {}) {
 }
 
 function saveProductsToStorage() {
+  // Guarda el array products en el localStorage usando la clave 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
 }
 
 function updateCategoryOptions() {
+  // Genera y actualiza las opciones del select de categorías
+
   if (!categorySelect) return;
 
   const currentValue = categorySelect.value;
+  // Crea el conjunto completo de categorías sin duplicados
   const dynamicCategories = [...new Set(products.map((product) => String(product.category ?? "").trim()).filter(Boolean))];
   const allCategories = [...new Set([...baseCategories, ...dynamicCategories])];
 
@@ -77,10 +133,12 @@ function updateCategoryOptions() {
     categorySelect.append(option);
   });
 
+  // Mantiene la selección previa si sigue siendo válida
   categorySelect.value = allCategories.includes(currentValue) || currentValue === "" ? currentValue : "";
 }
 
 function loadProductsFromStorage() {
+  // Obtiene y parsea los productos almacenados en localStorage
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) return null;
 
@@ -103,8 +161,12 @@ async function loadProducts() {
 
     if (visibleProducts.length === 0) {
       listStatus.textContent = "No hay productos disponibles.";
-    } else {
-      listStatus.textContent = `${visibleProducts.length} producto(s) disponible(s).`;
+    }
+    else if (visibleProducts.length === 1) {
+      listStatus.textContent = `${visibleProducts.length} producto disponible.`;
+    }
+    else {
+      listStatus.textContent = `${visibleProducts.length} productos disponibles.`;
     }
     return true;
   }
@@ -128,7 +190,7 @@ async function loadProducts() {
     if (visibleProducts.length === 0) {
       listStatus.textContent = "No hay productos disponibles.";
     } else {
-      listStatus.textContent = `${visibleProducts.length} producto(s) cargado(s).`;
+      listStatus.textContent = `${visibleProducts.length} productos cargados.`;
     }
     return true;
   } catch (error) {
@@ -138,10 +200,13 @@ async function loadProducts() {
 }
 
 function applySearchAndRender() {
+  // Aplica búsqueda y filtrado sobre el array original según los controles,
+  
   const searchTerm = (searchInput?.value ?? "").trim().toLowerCase();
   const sortField = sortSelect?.value ?? "name";
   const direction = directionSelect?.value ?? "asc";
 
+  // Filtrado
   visibleProducts = products.filter((product) => {
     const text = `${product.name ?? ""} ${product.category ?? ""}`.toLowerCase();
     const matchesSearch = !searchTerm || text.includes(searchTerm);
@@ -149,6 +214,7 @@ function applySearchAndRender() {
     return matchesSearch && matchesCategory;
   });
 
+  // Ordenado
   visibleProducts.sort((a, b) => {
     let left = a[sortField];
     let right = b[sortField];
@@ -164,19 +230,28 @@ function applySearchAndRender() {
     return direction === "desc" ? -result : result;
   });
 
-  renderProducts();
+  // Paginación
+  totalPages = Math.max(1, Math.ceil(visibleProducts.length / PAGE_SIZE));
+  if (currentPage > totalPages) currentPage = totalPages;
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+  const paginatedProducts = visibleProducts.slice(start, end);
 
+  renderProducts(paginatedProducts);
+  renderPagination();
+
+  // Mensaje resultado en variable listStatus
   if (visibleProducts.length === 0) {
     listStatus.textContent = "No hay productos que coincidan con la búsqueda.";
   } else {
-    listStatus.textContent = `${visibleProducts.length} producto(s) encontrado(s).`;
+    listStatus.textContent = `${visibleProducts.length} productos encontrados.`;
   }
 }
 
-function renderProducts() {
+function renderProducts(paginatedProducts) {
   tableBody.replaceChildren();
 
-  visibleProducts.forEach((product) => {
+  paginatedProducts.forEach((product) => {
     const row = document.createElement("tr");
     const values = [
       product.name,
@@ -206,23 +281,26 @@ function renderProducts() {
     tableBody.append(row);
   });
 
-  if (visibleProducts.length === 0) {
+  if (paginatedProducts.length === 0) {
     listStatus.textContent = "No hay productos que coincidan con la búsqueda.";
   }
 }
 
+// Eventos botones 
 tableBody.addEventListener("click", async (event) => {
 
- const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
-    if (target.dataset.action !== "delete") return;
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return;
+  if (target.dataset.action !== "delete") return;
 
-    const id = target.dataset.id;
-    if (!id) return;
+  const id = target.dataset.id;
+  if (!id) return;
+  target.disabled = true;
+
   let respuesta = confirm("¿Quieres eliminar producto?");
 
   if (respuesta) {
-   
+
 
     products = products.filter((product) => product.id !== id);
     saveProductsToStorage();
@@ -238,18 +316,27 @@ tableBody.addEventListener("click", async (event) => {
         method: "DELETE"
       });
     } catch {
+      listStatus.textContent = `Error al eliminar producto.`;
+
     }
 
     listStatus.textContent = "Producto borrado.";
+
   } else {
+    target.disabled = false;
+
     return;
   }
+  target.disabled = false;
 
 
 });
 
 productForm.addEventListener("submit", async (event) => {
+
   event.preventDefault();
+  productForm.querySelector('button[type="submit"]').disabled = true;
+
   const fields = new FormData(productForm);
   const product = {
     id: crypto.randomUUID(),
@@ -280,17 +367,21 @@ productForm.addEventListener("submit", async (event) => {
         name: product.name,
         category: product.category,
         price: product.price,
-        rating:product.rating,
+        rating: product.rating,
         stock: product.stock,
         description: product.description
       })
     });
   } catch {
+    listStatus.textContent = `Error al crear nuevo producto.`;
+  } finally {
+    productForm.querySelector('button[type="submit"]').disabled = false;
   }
 
   productForm.reset();
-  modal.style.display = "none";
+  closeModal();
   listStatus.textContent = "Producto añadido.";
+
 });
 
 updateCategoryOptions();
